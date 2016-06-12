@@ -2,14 +2,14 @@
 require File.expand_path("../lib/instagram/version", __FILE__)
 
 Gem::Specification.new do |s|
-  s.add_development_dependency("rake", "~> 10.5")
+  s.add_development_dependency("rake", "~> 11.2")
   s.add_development_dependency("rspec", "~> 3.4")
   s.add_development_dependency("webmock", "~> 1.22")
   s.add_development_dependency("bluecloth", "~> 2.2")
 
   s.add_runtime_dependency("faraday", "~> 0.9.2")
   s.add_runtime_dependency("faraday_middleware", "~> 0.10.0")
-  s.add_runtime_dependency("multi_json", "~> 1.11.2")
+  s.add_runtime_dependency("multi_json", "~> 1.12.1")
   s.add_runtime_dependency("hashie",  "~> 3.4.3")
 
   s.authors = ["Shayne Sweeney", "Nat Welch"]
