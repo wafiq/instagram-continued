@@ -111,7 +111,7 @@ describe Instagram::Client do
           @client.location_search("3fd66200f964a520c5f11ee3")
           expect(a_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:facebook_places_id => "3fd66200f964a520c5f11ee3"}).
+            with(:query => {:facebook_places_id => "3fd66200f964a520c5f11ee3"})).
             to have_been_made
         end
 
