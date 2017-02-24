@@ -1,6 +1,6 @@
 # Instagram-Continued
 
-[![Gem Version](https://badge.fury.io/rb/instagram-continued.svg)](https://badge.fury.io/rb/instagram-continued) [![Build Status](https://travis-ci.org/icco/instagram-ruby-gem.svg?branch=master)](https://travis-ci.org/icco/instagram-ruby-gem)
+[![Gem Version](https://badge.fury.io/rb/instagram-continued.svg)](https://badge.fury.io/rb/instagram-continued) [![Build Status](https://travis-ci.org/icco/instagram-continued.svg?branch=master)](https://travis-ci.org/icco/instagram-continued)
 
 [![Dependency Status](https://gemnasium.com/badges/github.com/icco/instagram-continued.svg)](https://gemnasium.com/github.com/icco/instagram-continued)
 
