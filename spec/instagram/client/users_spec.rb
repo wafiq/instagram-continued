@@ -161,7 +161,6 @@ describe Instagram::Client do
           let(:user_media_feed_response) { @client.user_media_feed }
           subject { user_media_feed_response }
 
-          it { is_expected.to be_an_instance_of(Array) }
           it { is_expected.to be_a_kind_of(Instagram::Response) }
           it { is_expected.to respond_to(:pagination) }
           it { is_expected.to respond_to(:meta) }
