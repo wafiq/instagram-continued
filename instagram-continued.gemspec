@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", "~> 3.4")
   s.add_development_dependency("webmock", "~> 1.22")
   s.add_development_dependency("bluecloth", "~> 2.2")
+  s.add_development_dependency("rubocop")
 
   s.add_runtime_dependency("faraday", "~> 0.11")
   s.add_runtime_dependency("faraday_middleware")
