@@ -1,8 +1,8 @@
-require File.expand_path('../instagram/error', __FILE__)
-require File.expand_path('../instagram/configuration', __FILE__)
-require File.expand_path('../instagram/api', __FILE__)
-require File.expand_path('../instagram/client', __FILE__)
-require File.expand_path('../instagram/response', __FILE__)
+require File.expand_path("../instagram/error", __FILE__)
+require File.expand_path("../instagram/configuration", __FILE__)
+require File.expand_path("../instagram/api", __FILE__)
+require File.expand_path("../instagram/client", __FILE__)
+require File.expand_path("../instagram/response", __FILE__)
 
 module Instagram
   extend Configuration
@@ -10,7 +10,7 @@ module Instagram
   # Alias for Instagram::Client.new
   #
   # @return [Instagram::Client]
-  def self.client(options={})
+  def self.client(options = {})
     Instagram::Client.new(options)
   end
 
@@ -21,7 +21,7 @@ module Instagram
   end
 
   # Delegate to Instagram::Client
-  def self.respond_to?(method, include_all=false)
-    return client.respond_to?(method, include_all) || super
+  def self.respond_to?(method, include_all = false)
+    client.respond_to?(method, include_all) || super
   end
 end

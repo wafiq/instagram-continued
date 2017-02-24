@@ -17,7 +17,7 @@ module Instagram
       # @see http://instagram.com/developer/endpoints/users/#get_users
       def user(*args)
         options = args.last.is_a?(Hash) ? args.pop : {}
-        id = args.first || 'self'
+        id = args.first || "self"
         response = get("users/#{id}", options)
         response
       end
@@ -34,8 +34,8 @@ module Instagram
       # @see http://instagram.com/developer/endpoints/users/#get_users_search
       # @example Return users that match "Shayne Sweeney"
       #   Instagram.user_search("Shayne Sweeney")
-      def user_search(query, options={})
-        response = get('users/search', options.merge(:q => query))
+      def user_search(query, options = {})
+        response = get("users/search", options.merge(q: query))
         response
       end
 
@@ -111,7 +111,7 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def user_requested_by()
+    def user_requested_by
       response = get("users/self/requested-by")
       response
     end
@@ -132,7 +132,7 @@ module Instagram
     # @see http://instagram.com/developer/endpoints/users/#get_users_feed
     def user_media_feed(*args)
       options = args.first.is_a?(Hash) ? args.pop : {}
-      response = get('users/self/feed', options)
+      response = get("users/self/feed", options)
       response
     end
 
@@ -177,7 +177,7 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def user_liked_media(options={})
+    def user_liked_media(options = {})
       response = get("users/self/media/liked", options)
       response
     end
@@ -194,7 +194,7 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def user_relationship(id, options={})
+    def user_relationship(id, options = {})
       response = get("users/#{id}/relationship", options)
       response
     end
@@ -211,9 +211,9 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def follow_user(id, options={})
+    def follow_user(id, options = {})
       options["action"] = "follow"
-      response = post("users/#{id}/relationship", options, signature=true)
+      response = post("users/#{id}/relationship", options, signature = true)
       response
     end
 
@@ -229,9 +229,9 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def unfollow_user(id, options={})
+    def unfollow_user(id, options = {})
       options["action"] = "unfollow"
-      response = post("users/#{id}/relationship", options, signature=true)
+      response = post("users/#{id}/relationship", options, signature = true)
       response
     end
 
@@ -247,9 +247,9 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def block_user(id, options={})
+    def block_user(id, options = {})
       options["action"] = "block"
-      response = post("users/#{id}/relationship", options, signature=true)
+      response = post("users/#{id}/relationship", options, signature = true)
       response
     end
 
@@ -265,9 +265,9 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def unblock_user(id, options={})
+    def unblock_user(id, options = {})
       options["action"] = "unblock"
-      response = post("users/#{id}/relationship", options, signature=true)
+      response = post("users/#{id}/relationship", options, signature = true)
       response
     end
 
@@ -283,9 +283,9 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def approve_user(id, options={})
+    def approve_user(id, options = {})
       options["action"] = "approve"
-      response = post("users/#{id}/relationship", options, signature=true)
+      response = post("users/#{id}/relationship", options, signature = true)
       response
     end
 
@@ -301,9 +301,9 @@ module Instagram
     # @format :json
     # @authenticated true
     # @rate_limited true
-    def deny_user(id, options={})
+    def deny_user(id, options = {})
       options["action"] = "deny"
-      response = post("users/#{id}/relationship", options, signature=true)
+      response = post("users/#{id}/relationship", options, signature = true)
       response
     end
   end

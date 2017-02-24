@@ -15,7 +15,7 @@ module Instagram
       #   If getting this data of a protected user, you must be authenticated (and be allowed to see that user).
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/likes/#get_media_likes
-      def media_likes(id, *args)
+      def media_likes(id, *_args)
         response = get("media/#{id}/likes")
         response
       end
@@ -33,8 +33,8 @@ module Instagram
       #   If getting this data of a protected user, you must be authenticated (and be allowed to see that user).
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/likes/#post_likes
-      def like_media(id, options={})
-        response = post("media/#{id}/likes", options, signature=true)
+      def like_media(id, options = {})
+        response = post("media/#{id}/likes", options, signature = true)
         response
       end
 
@@ -49,8 +49,8 @@ module Instagram
       # @authenticated true
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/likes/#delete_likes
-      def unlike_media(id, options={})
-        response = delete("media/#{id}/likes", options, signature=true)
+      def unlike_media(id, options = {})
+        response = delete("media/#{id}/likes", options, signature = true)
         response
       end
     end
