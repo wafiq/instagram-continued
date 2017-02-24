@@ -1,28 +1,28 @@
 begin
-  require 'simplecov'
+  require "simplecov"
 rescue LoadError
   # ignore
 else
   SimpleCov.start do
-    add_group 'Instagram', 'lib/instagram'
-    add_group 'Faraday Middleware', 'lib/faraday'
-    add_group 'Specs', 'spec'
+    add_group "Instagram", "lib/instagram"
+    add_group "Faraday Middleware", "lib/faraday"
+    add_group "Specs", "spec"
   end
 end
 
-require File.expand_path('../../lib/instagram', __FILE__)
+require File.expand_path("../../lib/instagram", __FILE__)
 
-require 'rspec'
-require 'webmock/rspec'
+require "rspec"
+require "webmock/rspec"
 RSpec.configure do |config|
   config.include WebMock::API
 end
 
-def capture_output(&block)
+def capture_output
   begin
     old_stdout = $stdout
     $stdout = StringIO.new
-    block.call
+    yield
     result = $stdout.string
   ensure
     $stdout = old_stdout
@@ -67,5 +67,5 @@ def fixture_path
 end
 
 def fixture(file)
-  File.new(fixture_path + '/' + file)
+  File.new(fixture_path + "/" + file)
 end

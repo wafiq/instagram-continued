@@ -13,7 +13,7 @@ module Instagram
       # @authenticated false
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/locations/#get_locations
-      def location(id, *args)
+      def location(id, *_args)
         response = get("locations/#{id}")
         response
       end
@@ -60,13 +60,13 @@ module Instagram
         case args.size
         when 1
           facebook_places_id = args.first
-          response = get('locations/search', options.merge(:facebook_places_id => facebook_places_id))
+          response = get("locations/search", options.merge(facebook_places_id: facebook_places_id))
         when 2
           lat, lng = args
-          response = get('locations/search', options.merge(:lat => lat, :lng => lng))
+          response = get("locations/search", options.merge(lat: lat, lng: lng))
         when 3
           lat, lng, distance = args
-          response = get('locations/search', options.merge(:lat => lat, :lng => lng, :distance => distance))
+          response = get("locations/search", options.merge(lat: lat, lng: lng, distance: distance))
         end
         response
       end

@@ -13,7 +13,7 @@ module Instagram
       # @authenticated false
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/tags/#get_tags
-      def tag(tag, *args)
+      def tag(tag, *_args)
         response = get("tags/#{tag}")
         response
       end
@@ -50,8 +50,8 @@ module Instagram
       # @see http://instagram.com/developer/endpoints/tags/#get_tags_search
       # @example Return tags that start with "cat"
       #   Instagram.tag_search("cat")
-      def tag_search(query, options={})
-        response = get('tags/search', options.merge(:q => query))
+      def tag_search(query, options = {})
+        response = get("tags/search", options.merge(q: query))
         response
       end
     end

@@ -1,5 +1,5 @@
-require 'openssl'
-require 'multi_json'
+require "openssl"
+require "multi_json"
 
 module Instagram
   class Client
@@ -17,8 +17,8 @@ module Instagram
       #   Requires client_secret to be set on the client or passed in options
       # @rate_limited true
       # @see https://api.instagram.com/developer/realtime/
-      def subscriptions(options={})
-        response = get("subscriptions", options.merge(:client_secret => client_secret))
+      def subscriptions(options = {})
+        response = get("subscriptions", options.merge(client_secret: client_secret))
         response
       end
 
@@ -58,12 +58,12 @@ module Instagram
         object = args.shift
         callback_url = args.shift
         aspect = args.shift
-        options.tap {|o|
+        options.tap do |o|
           o[:object] = object unless object.nil?
           o[:callback_url] = callback_url unless callback_url.nil?
           o[:aspect] = aspect || o[:aspect] || "media"
-        }
-        response = post("subscriptions", options.merge(:client_secret => client_secret), signature=true)
+        end
+        response = post("subscriptions", options.merge(client_secret: client_secret), signature = true)
         response
       end
 
@@ -91,8 +91,8 @@ module Instagram
       def delete_subscription(*args)
         options = args.last.is_a?(Hash) ? args.pop : {}
         subscription_id = args.first
-        options.merge!(:id => subscription_id) if subscription_id
-        response = delete("subscriptions", options.merge(:client_secret => client_secret), signature=true)
+        options[:id] = subscription_id if subscription_id
+        response = delete("subscriptions", options.merge(client_secret: client_secret), signature = true)
         response
       end
 
@@ -111,14 +111,14 @@ module Instagram
       # @return the challenge string to be sent back to Instagram, or false if the request is invalid.
       def meet_challenge(params, verify_token = nil, &verification_block)
         if params["hub.mode"] == "subscribe" &&
-            # you can make sure this is legitimate through two ways
-            # if your store the token across the calls, you can pass in the token value
-            # and we'll make sure it matches
-            ((verify_token && params["hub.verify_token"] == verify_token) ||
-            # alternately, if you sent a specially-constructed value (such as a hash of various secret values)
-            # you can pass in a block, which we'll call with the verify_token sent by Instagram
-            # if it's legit, return anything that evaluates to true; otherwise, return nil or false
-            (verification_block && yield(params["hub.verify_token"])))
+           # you can make sure this is legitimate through two ways
+           # if your store the token across the calls, you can pass in the token value
+           # and we'll make sure it matches
+           ((verify_token && params["hub.verify_token"] == verify_token) ||
+           # alternately, if you sent a specially-constructed value (such as a hash of various secret values)
+           # you can pass in a block, which we'll call with the verify_token sent by Instagram
+           # if it's legit, return anything that evaluates to true; otherwise, return nil or false
+           (verification_block && yield(params["hub.verify_token"])))
           params["hub.challenge"]
         else
           false
@@ -143,8 +143,8 @@ module Instagram
           raise ArgumentError, "client_secret must be set during configure"
         end
 
-        if request_signature = headers['X-Hub-Signature'] || headers['HTTP_X_HUB_SIGNATURE']
-          calculated_signature = OpenSSL::HMAC.hexdigest('sha1', client_secret, body)
+        if request_signature = headers["X-Hub-Signature"] || headers["HTTP_X_HUB_SIGNATURE"]
+          calculated_signature = OpenSSL::HMAC.hexdigest("sha1", client_secret, body)
           calculated_signature == request_signature
         end
       end
@@ -174,14 +174,14 @@ module Instagram
       #   Requires client_secret to be set on the client or passed in options
       # @rate_limited true
       # @see https://api.instagram.com/developer/realtime/
-      def process_subscription(json, options={}, &block)
+      def process_subscription(json, options = {})
         raise ArgumentError, "callbacks block expected" unless block_given?
 
-        if options.has_key?(:signature)
-          if !client_secret
+        if options.key?(:signature)
+          unless client_secret
             raise ArgumentError, "client_secret must be set during configure"
           end
-          digest = OpenSSL::Digest.new('sha1')
+          digest = OpenSSL::Digest.new("sha1")
           verify_signature = OpenSSL::HMAC.hexdigest(digest, client_secret, json)
 
           if options[:signature] != verify_signature
@@ -190,15 +190,15 @@ module Instagram
         end
 
         payload = MultiJson.decode(json)
-        @changes = Hash.new { |h,k| h[k] = [] }
+        @changes = Hash.new { |h, k| h[k] = [] }
         for change in payload
-          @changes[change['object']] << change
+          @changes[change["object"]] << change
         end
-        block.call(self)
+        yield(self)
       end
 
       [:user, :tag, :location, :geography].each do |object|
-        class_eval <<-RUBY_EVAL, __FILE__, __LINE__ +1
+        class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
           def on_#{object}_changed(&block)
             for change in @changes['#{object}']
               yield change.delete('object_id'), change

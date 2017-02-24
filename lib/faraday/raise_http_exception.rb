@@ -1,4 +1,4 @@
-require 'faraday'
+require "faraday"
 
 # @private
 module FaradayMiddleware
@@ -35,27 +35,27 @@ module FaradayMiddleware
     private
 
     def error_message_400(response)
-      "#{response[:method].to_s.upcase} #{response[:url].to_s}: #{response[:status]}#{error_body(response[:body])}"
+      "#{response[:method].to_s.upcase} #{response[:url]}: #{response[:status]}#{error_body(response[:body])}"
     end
 
     def error_body(body)
       # body gets passed as a string, not sure if it is passed as something else from other spots?
-      if not body.nil? and not body.empty? and body.kind_of?(String)
+      if !body.nil? && !body.empty? && body.is_a?(String)
         # removed multi_json thanks to wesnolte's commit
         body = ::JSON.parse(body)
       end
 
       if body.nil?
         nil
-      elsif body['meta'] and body['meta']['error_message'] and not body['meta']['error_message'].empty?
-        ": #{body['meta']['error_message']}"
-      elsif body['error_message'] and not body['error_message'].empty?
-        ": #{body['error_type']}: #{body['error_message']}"
+      elsif body["meta"] && body["meta"]["error_message"] && !body["meta"]["error_message"].empty?
+        ": #{body["meta"]["error_message"]}"
+      elsif body["error_message"] && !body["error_message"].empty?
+        ": #{body["error_type"]}: #{body["error_message"]}"
       end
     end
 
-    def error_message_500(response, body=nil)
-      "#{response[:method].to_s.upcase} #{response[:url].to_s}: #{[response[:status].to_s + ':', body].compact.join(' ')}"
+    def error_message_500(response, body = nil)
+      "#{response[:method].to_s.upcase} #{response[:url]}: #{[response[:status].to_s + ":", body].compact.join(" ")}"
     end
   end
 end
