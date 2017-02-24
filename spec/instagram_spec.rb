@@ -1,4 +1,4 @@
-require File.expand_path('../spec_helper', __FILE__)
+require File.expand_path("../spec_helper", __FILE__)
 
 describe Instagram do
   after do
@@ -6,22 +6,20 @@ describe Instagram do
   end
 
   context "when delegating to a client" do
+    before do
+      stub_get("users/self/feed.json")
+        .to_return(body: fixture("user_media_feed.json"), headers: { content_type: "application/json; charset=utf-8" })
+    end
 
-     before do
-       stub_get("users/self/feed.json").
-         to_return(:body => fixture("user_media_feed.json"), :headers => {:content_type => "application/json; charset=utf-8"})
-     end
+    it "should get the correct resource" do
+      Instagram.user_media_feed
+      expect(a_get("users/self/feed.json")).to have_been_made
+    end
 
-     it "should get the correct resource" do
-       Instagram.user_media_feed()
-       expect(a_get("users/self/feed.json")).to have_been_made
-     end
-
-     it "should return the same results as a client" do
-       expect(Instagram.user_media_feed()).to eq(Instagram::Client.new.user_media_feed())
-     end
-
-   end
+    it "should return the same results as a client" do
+      expect(Instagram.user_media_feed).to eq(Instagram::Client.new.user_media_feed)
+    end
+  end
 
   describe ".client" do
     it "should be a Instagram::Client" do
@@ -50,8 +48,8 @@ describe Instagram do
 
   describe ".endpoint=" do
     it "should set the endpoint" do
-      Instagram.endpoint = 'http://tumblr.com'
-      expect(Instagram.endpoint).to eq('http://tumblr.com')
+      Instagram.endpoint = "http://tumblr.com"
+      expect(Instagram.endpoint).to eq("http://tumblr.com")
     end
   end
 
@@ -63,8 +61,8 @@ describe Instagram do
 
   describe ".format=" do
     it "should set the format" do
-      Instagram.format = 'xml'
-      expect(Instagram.format).to eq('xml')
+      Instagram.format = "xml"
+      expect(Instagram.format).to eq("xml")
     end
   end
 
@@ -76,12 +74,12 @@ describe Instagram do
 
   describe ".user_agent=" do
     it "should set the user_agent" do
-      Instagram.user_agent = 'Custom User Agent'
-      expect(Instagram.user_agent).to eq('Custom User Agent')
+      Instagram.user_agent = "Custom User Agent"
+      expect(Instagram.user_agent).to eq("Custom User Agent")
     end
   end
 
-    describe ".loud_logger" do
+  describe ".loud_logger" do
     it "should return the loud_logger status" do
       expect(Instagram.loud_logger).to eq(nil)
     end
@@ -95,9 +93,7 @@ describe Instagram do
   end
 
   describe ".configure" do
-
     Instagram::Configuration::VALID_OPTIONS_KEYS.each do |key|
-
       it "should set the #{key}" do
         Instagram.configure do |config|
           config.send("#{key}=", key)

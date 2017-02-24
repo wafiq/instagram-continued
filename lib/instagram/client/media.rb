@@ -16,7 +16,7 @@ module Instagram
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/media/#get_media
       def media_item(*args)
-        id = args.first || 'self'
+        id = args.first || "self"
         response = get("media/#{id}")
         response
       end
@@ -73,8 +73,8 @@ module Instagram
       # @format :json
       # @authenticated false
       # @rate_limited true
-      def media_search(lat, lng, options={})
-        response = get('media/search', options.merge(:lat => lat, :lng => lng))
+      def media_search(lat, lng, options = {})
+        response = get("media/search", options.merge(lat: lat, lng: lng))
         response
       end
     end

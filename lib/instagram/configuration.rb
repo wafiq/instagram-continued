@@ -1,5 +1,5 @@
-require 'faraday'
-require File.expand_path('../version', __FILE__)
+require "faraday"
+require File.expand_path("../version", __FILE__)
 
 module Instagram
   # Defines constants and methods related to configuration
@@ -41,12 +41,12 @@ module Instagram
     DEFAULT_CLIENT_IPS = nil
 
     # By default, don't set any connection options
-    DEFAULT_CONNECTION_OPTIONS = {}
+    DEFAULT_CONNECTION_OPTIONS = {}.freeze
 
     # The endpoint that will be used to connect if none is set
     #
     # @note There is no reason to use any other endpoint at this time
-    DEFAULT_ENDPOINT = 'https://api.instagram.com/v1/'.freeze
+    DEFAULT_ENDPOINT = "https://api.instagram.com/v1/".freeze
 
     # The response format appended to the path and sent in the 'Accept' header if none is set
     #
@@ -72,7 +72,8 @@ module Instagram
     #
     # @note Not all methods support the XML format.
     VALID_FORMATS = [
-      :json].freeze
+      :json,
+    ].freeze
 
     # By default, don't turn on loud logging
     DEFAULT_LOUD_LOGGER = nil
@@ -114,7 +115,7 @@ module Instagram
       self.format             = DEFAULT_FORMAT
       self.proxy              = DEFAULT_PROXY
       self.user_agent         = DEFAULT_USER_AGENT
-      self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER
+      self.no_response_wrapper = DEFAULT_NO_RESPONSE_WRAPPER
       self.loud_logger        = DEFAULT_LOUD_LOGGER
       self.sign_requests      = DEFAULT_SIGN_REQUESTS
     end

@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("hashie")
 
   s.authors = ["Shayne Sweeney", "Nat Welch"]
-  s.description = %q{A Ruby wrapper for the Instagram REST and Search APIs}
+  s.description = "A Ruby wrapper for the Instagram REST and Search APIs"
   s.email = ["shayne@instagr.am", "nat@natwelch.com"]
-  s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.files = `git ls-files`.split("\n")
   s.homepage = "https://github.com/icco/instagram-continued"
   s.name = "instagram-continued"
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.6")
   s.required_ruby_version = Gem::Requirement.new(">= 2.0.0")
   s.rubyforge_project = s.name
-  s.summary = %q{Ruby wrapper for the Instagram API}
+  s.summary = "Ruby wrapper for the Instagram API"
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.version = Instagram::VERSION.dup
 end
