@@ -3,6 +3,7 @@ module Instagram
     def self.create(response_hash, ratelimit_hash)
       response_hash = {} unless response_hash
       data = begin
+               raise if response_hash.data.nil?
                response_hash.data.dup
              rescue
                response_hash
