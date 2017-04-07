@@ -254,28 +254,6 @@ describe Instagram::API do
           expect(output).to include '{"meta":{"error_message": "Bad words are bad."}}'
         end
       end
-
-      context "will redact API keys if INSTAGRAM_GEM_REDACT=true" do
-        before do
-          stub_get("users/self/feed.json")
-            .to_return(body: fixture("user_media_feed.json"), headers: { content_type: "application/json; charset=utf-8" })
-        end
-
-        it "should redact API keys" do
-          allow(ENV).to receive(:[]).with("http_proxy").and_return(nil)
-          allow(ENV).to receive(:[]).with("INSTAGRAM_GEM_REDACT").and_return("true")
-
-          output = capture_output do
-            @client.user_media_feed
-          end
-
-          expect(output).to include "INFO -- : Started GET request to: https://api.instagram.com/v1/users/self/feed.json"
-          expect(output).to include "DEBUG -- : Response Headers:"
-          expect(output).to include "User-Agent : Instagram Ruby Gem #{Instagram::VERSION}"
-          expect(output).to include "http://distillery.s3.amazonaws.com/media/2011/01/31/0f8e832c3dc6420bb6ddf0bd09f032f6_6.jpg"
-          expect(output).to include "access_token=[ACCESS-TOKEN]"
-        end
-      end
     end
   end
 end
